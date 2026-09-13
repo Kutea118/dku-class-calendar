@@ -19,12 +19,11 @@
 
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-title">
-        <p class="eyebrow">FALL 2026 · ASIA/SHANGHAI</p>
+        <p class="eyebrow">FALL 2026 · ASIA/KUNSHAN</p>
         <h1 id="page-title">Your class week,<br><span>calendar-ready.</span></h1>
       </div>
       <div class="intro-side">
-        <img class="campus-crew" src="./campus-crew.png" alt="Five colorful original campus mascots flying above a university skyline">
-        <p class="intro-copy">Upload a simple course list. We skip DKU breaks, apply make-up weekdays, and create one clean file for Apple Calendar.</p>
+        <p class="intro-copy">Upload the .ics timetable you downloaded. We skip DKU breaks, apply make-up weekdays, and create one corrected file for Apple Calendar.</p>
       </div>
     </section>
 
@@ -32,19 +31,18 @@
       <div class="panel import-panel">
         <div class="step-heading">
           <span class="step-number">01</span>
-          <div><h2>Add your schedule</h2><p>CSV is the quickest. A template is included.</p></div>
+          <div><h2>Add your schedule</h2><p>Use the .ics calendar file downloaded from your school timetable.</p></div>
         </div>
         <label class="dropzone" for="schedule-file">
-          <input id="schedule-file" type="file" accept=".csv,text/csv">
+          <input id="schedule-file" type="file" accept=".ics,text/calendar">
           <span class="upload-icon" aria-hidden="true">↑</span>
-          <strong>Drop your CSV here</strong>
+          <strong>Drop your .ics file here</strong>
           <small>or click to choose a file</small>
         </label>
         <div class="import-actions">
-          <button class="text-button" id="download-template" type="button">Download CSV template</button>
           <button class="text-button" id="load-sample" type="button">Use sample schedule</button>
         </div>
-        <div class="format-hint"><strong>Columns:</strong> course, days, start, end, location, session, notes</div>
+        <div class="format-hint"><strong>Supported:</strong> weekly recurring VEVENT entries with DTSTART, DTEND and RRULE.</div>
       </div>
 
       <div class="panel calendar-panel">
@@ -64,6 +62,26 @@
       </div>
     </section>
 
+    <section class="extra-panel" aria-labelledby="extra-title">
+      <div class="step-heading extra-heading">
+        <span class="step-number violet">03</span>
+        <div><h2 id="extra-title">Add a little extra</h2><p>Type it or say it. We’ll add it to the same Apple Calendar file.</p></div>
+      </div>
+      <div class="extra-grid">
+        <div>
+          <label class="sr-only" for="extra-event-input">Extra event details</label>
+          <textarea id="extra-event-input" rows="3" placeholder="Study group on 2026-09-18 from 19:00 to 20:00 at Library"></textarea>
+          <p class="extra-hint">Try: <strong>Title on YYYY-MM-DD from HH:MM to HH:MM at Location</strong></p>
+        </div>
+        <div class="extra-actions">
+          <button class="voice-button" id="voice-input" type="button"><span aria-hidden="true">●</span> Speak</button>
+          <button class="primary-button add-event-button" id="add-extra-event" type="button">Add event <span aria-hidden="true">＋</span></button>
+          <p id="voice-status" class="voice-status" aria-live="polite">Microphone is off.</p>
+        </div>
+      </div>
+      <div id="extra-event-list" class="extra-event-list" aria-live="polite"></div>
+    </section>
+
     <section class="preview-panel" aria-labelledby="preview-title">
       <div class="preview-header">
         <div><p class="eyebrow">PREVIEW</p><h2 id="preview-title">A tidy week is waiting</h2></div>
@@ -79,7 +97,36 @@
       </div>
     </section>
 
-    <footer><p>Made for DKU students · No schedule data leaves your browser.</p><p>Calendar rules checked September 12, 2026.</p></footer>
+    <section class="import-guide" id="import-guide" aria-labelledby="import-guide-title" hidden>
+      <div class="guide-title">
+        <p class="eyebrow">NEXT STEP</p>
+        <h2 id="import-guide-title">Import it into Apple Calendar</h2>
+        <p>Your corrected .ics file is ready. Pick your device:</p>
+      </div>
+      <div class="guide-grid">
+        <article>
+          <span class="device-badge">iPhone · iPad</span>
+          <ol>
+            <li>Open the downloaded <strong>.ics</strong> file.</li>
+            <li>If Files does not offer Calendar, email the file to yourself and open the attachment in Mail.</li>
+            <li>Follow the Calendar prompt, choose the calendar you want, then add all events.</li>
+          </ol>
+          <a href="https://support.apple.com/guide/iphone/set-up-mail-contacts-and-calendar-accounts-ipha0d932e96/ios" target="_blank" rel="noreferrer">Apple’s iPhone guide ↗</a>
+        </article>
+        <article>
+          <span class="device-badge mac">Mac</span>
+          <ol>
+            <li>Open the <strong>Calendar</strong> app.</li>
+            <li>Choose <strong>File → Import</strong> and select the downloaded .ics file.</li>
+            <li>Choose a destination calendar, then click <strong>OK</strong>.</li>
+          </ol>
+          <a href="https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac" target="_blank" rel="noreferrer">Apple’s Mac guide ↗</a>
+        </article>
+      </div>
+      <p class="guide-tip"><strong>Tip:</strong> Create a separate “DKU Classes” calendar first. It makes future replacement or cleanup much easier.</p>
+    </section>
+
+    <footer><p>Made for DKU students · Typed schedules stay in your browser. Voice processing depends on your browser.</p><p>Calendar rules checked September 12, 2026.</p></footer>
   </main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./app.js" defer></script>
