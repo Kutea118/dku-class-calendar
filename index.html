@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convert a Duke Kunshan University class schedule into an Apple Calendar file with DKU holiday and make-up day corrections.">
+  <title>DKU Class Calendar</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="DKU Class Calendar home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>DKU Class Calendar</span>
+      </a>
+      <a class="source-link" href="https://registrar.dukekunshan.edu.cn/academic-calendar/" target="_blank" rel="noreferrer">Official calendar ↗</a>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-title">
+        <p class="eyebrow">FALL 2026 · ASIA/SHANGHAI</p>
+        <h1 id="page-title">Your class week,<br><span>calendar-ready.</span></h1>
+      </div>
+      <div class="intro-side">
+        <img class="campus-crew" src="./campus-crew.png" alt="Five colorful original campus mascots flying above a university skyline">
+        <p class="intro-copy">Upload a simple course list. We skip DKU breaks, apply make-up weekdays, and create one clean file for Apple Calendar.</p>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Schedule converter">
+      <div class="panel import-panel">
+        <div class="step-heading">
+          <span class="step-number">01</span>
+          <div><h2>Add your schedule</h2><p>CSV is the quickest. A template is included.</p></div>
+        </div>
+        <label class="dropzone" for="schedule-file">
+          <input id="schedule-file" type="file" accept=".csv,text/csv">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong>Drop your CSV here</strong>
+          <small>or click to choose a file</small>
+        </label>
+        <div class="import-actions">
+          <button class="text-button" id="download-template" type="button">Download CSV template</button>
+          <button class="text-button" id="load-sample" type="button">Use sample schedule</button>
+        </div>
+        <div class="format-hint"><strong>Columns:</strong> course, days, start, end, location, session, notes</div>
+      </div>
+
+      <div class="panel calendar-panel">
+        <div class="step-heading">
+          <span class="step-number pink">02</span>
+          <div><h2>DKU rules applied</h2><p>Based on the 2026–2027 Registrar calendar.</p></div>
+        </div>
+        <div class="rule-grid">
+          <article><span class="rule-icon blue">×</span><div><strong>Breaks removed</strong><p>Mid-Autumn · National Day</p></div></article>
+          <article><span class="rule-icon yellow">↻</span><div><strong>Make-up days</strong><p>Weekday swaps are automatic</p></div></article>
+        </div>
+        <div class="settings-row">
+          <label><span>Academic term</span><select id="term-select"><option value="fall-2026">Fall 2026</option><option value="spring-2027">Spring 2027</option></select></label>
+          <label class="check-label"><input type="checkbox" id="alerts" checked><span>10-minute alerts</span></label>
+        </div>
+        <div class="calendar-note"><span aria-hidden="true">!</span><p>The Registrar notes that dates may change. Check the source before importing.</p></div>
+      </div>
+    </section>
+
+    <section class="preview-panel" aria-labelledby="preview-title">
+      <div class="preview-header">
+        <div><p class="eyebrow">PREVIEW</p><h2 id="preview-title">A tidy week is waiting</h2></div>
+        <button class="primary-button" id="export-button" type="button" disabled>Export .ics <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="empty-preview" id="empty-preview">
+        <div class="orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p>Add a schedule to see every class date before exporting.</p>
+      </div>
+      <div id="schedule-preview" class="schedule-preview" hidden>
+        <div class="summary-strip" id="summary-strip"></div>
+        <div class="course-list" id="course-list"></div>
+      </div>
+    </section>
+
+    <footer><p>Made for DKU students · No schedule data leaves your browser.</p><p>Calendar rules checked September 12, 2026.</p></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
